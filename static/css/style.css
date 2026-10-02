@@ -1,0 +1,1123 @@
+/* ==========================================================================
+   ESTILOS VISUALES: CRÓNICA DE LA PRISA LIMEÑA
+   Diseño Cinematográfico Documental para Comunicación Audiovisual
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
+:root {
+  /* Paleta cromática: Lima Urbana y Cinematografía Documental */
+  --bg-deep: #0f1013;
+  --bg-surface: #17181d;
+  --bg-elevated: #20222a;
+  --bg-subtle: #292c36;
+  
+  --text-main: #ecebe8;
+  --text-muted: #9fa4b0;
+  --text-dim: #6c717e;
+  
+  /* Acentos de luz: Alumbrado de sodio, semáforo, garúa */
+  --amber-warm: #e39335;
+  --amber-soft: #f0aa52;
+  --amber-glow: rgba(227, 147, 53, 0.15);
+  
+  --red-brake: #d34e3e;
+  --red-glow: rgba(211, 78, 62, 0.15);
+  
+  --fog-grey: #c8cbd2;
+  --border-line: rgba(255, 255, 255, 0.08);
+  --border-line-hover: rgba(227, 147, 53, 0.35);
+
+  /* Tipografías */
+  --font-serif: 'Newsreader', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Espaciados y contenedores */
+  --container-max: 1200px;
+  --container-narrow: 840px;
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  
+  --transition-smooth: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Reset y Bases */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.65;
+  overflow-x: hidden;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Capa de textura sutil de grano de película 35mm */
+.film-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Barra de progreso de lectura superior */
+#reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--amber-warm), #ff6b4a);
+  width: 0%;
+  z-index: 1000;
+  transition: width 0.1s linear;
+}
+
+/* ==========================================================================
+   BARRA DE NAVEGACIÓN SUPERIOR (Estilo Ficha Documental)
+   ========================================================================== */
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.25rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 500;
+  background: rgba(15, 16, 19, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border-line);
+  transition: var(--transition-smooth);
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.film-roll-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--amber-warm);
+  box-shadow: 0 0 10px var(--amber-warm);
+  animation: pulse-dot 2.5s infinite ease-in-out;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.nav-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--fog-grey);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--amber-soft);
+}
+
+/* Botón de Sonido Ambiente Limeño */
+.audio-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-line);
+  color: var(--text-muted);
+  padding: 0.45rem 0.9rem;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.audio-toggle-btn:hover {
+  background: rgba(227, 147, 53, 0.15);
+  border-color: var(--amber-warm);
+  color: var(--amber-warm);
+}
+
+.audio-toggle-btn.playing {
+  background: rgba(227, 147, 53, 0.2);
+  border-color: var(--amber-warm);
+  color: #fff;
+}
+
+.sound-wave {
+  display: inline-flex;
+  gap: 2px;
+  align-items: flex-end;
+  height: 12px;
+}
+
+.sound-wave span {
+  width: 2px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 1px;
+}
+
+.audio-toggle-btn.playing .sound-wave span:nth-child(1) { animation: wave 0.8s infinite alternate ease-in-out; }
+.audio-toggle-btn.playing .sound-wave span:nth-child(2) { animation: wave 1.2s infinite alternate ease-in-out 0.2s; }
+.audio-toggle-btn.playing .sound-wave span:nth-child(3) { animation: wave 0.9s infinite alternate ease-in-out 0.4s; }
+
+@keyframes wave {
+  0% { height: 3px; }
+  100% { height: 12px; }
+}
+
+/* ==========================================================================
+   HERO CINEMATOGRÁFICO
+   ========================================================================== */
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 8rem 2rem 5rem 2rem;
+  overflow: hidden;
+}
+
+.hero-background-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.42) contrast(1.1) saturate(0.85);
+  transform: scale(1.03);
+  transition: transform 12s ease-out;
+}
+
+.hero-section:hover .hero-bg-img {
+  transform: scale(1.0);
+}
+
+.hero-gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 16, 19, 0.4) 0%,
+    rgba(15, 16, 19, 0.75) 60%,
+    rgba(15, 16, 19, 1) 100%
+  );
+}
+
+.hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-meta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(20, 22, 27, 0.75);
+  border: 1px solid var(--border-line);
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--amber-soft);
+  letter-spacing: 0.05em;
+}
+
+.hero-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  max-width: 950px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--amber-soft);
+  font-weight: 300;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.05rem, 1.6vw, 1.28rem);
+  color: var(--fog-grey);
+  max-width: 720px;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+
+/* Claqueta / Ficha Técnica de Autores */
+.hero-credits-card {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 1.25rem 1.75rem;
+  background: rgba(23, 24, 29, 0.85);
+  border: 1px solid var(--border-line);
+  border-left: 3px solid var(--amber-warm);
+  border-radius: var(--radius-md);
+  max-width: 880px;
+  font-size: 0.85rem;
+}
+
+.credit-block h4 {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--amber-soft);
+  margin-bottom: 0.25rem;
+}
+
+.credit-block p {
+  color: var(--text-main);
+  font-size: 0.82rem;
+}
+
+.author-names {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.8rem;
+}
+
+.author-names span {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   SECCIONES Y LAYOUT GENERAL
+   ========================================================================== */
+.section {
+  padding: 6.5rem 2rem;
+  position: relative;
+}
+
+.section-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+
+.section-narrow {
+  max-width: var(--container-narrow);
+  margin: 0 auto;
+}
+
+.section-header {
+  margin-bottom: 3.5rem;
+}
+
+.section-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--amber-warm);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.section-lead {
+  font-size: 1.15rem;
+  color: var(--text-muted);
+  max-width: 740px;
+  margin-top: 1rem;
+  line-height: 1.65;
+  font-weight: 300;
+}
+
+/* ==========================================================================
+   MÉTRICAS CLAVE (EL COSTO DEL TIEMPO EN LIMA)
+   ========================================================================== */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.metric-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  padding: 2rem 1.75rem;
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.metric-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--border-line);
+  transition: var(--transition-smooth);
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(227, 147, 53, 0.3);
+  background: var(--bg-elevated);
+}
+
+.metric-card:hover::before {
+  background: var(--amber-warm);
+}
+
+.metric-number {
+  font-family: var(--font-serif);
+  font-size: 3.2rem;
+  font-weight: 500;
+  color: var(--amber-warm);
+  line-height: 1;
+  margin-bottom: 0.75rem;
+}
+
+.metric-label {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.metric-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+}
+
+.metric-source {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  border-top: 1px solid var(--border-line);
+  padding-top: 0.75rem;
+  display: block;
+}
+
+/* ==========================================================================
+   CRÓNICAS AUDIOVISUALES (FOTOGRAFÍAS Y NARRATIVA)
+   ========================================================================== */
+.chronicles-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+  margin-top: 3rem;
+}
+
+.chronicle-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  padding: 2rem;
+  transition: var(--transition-smooth);
+}
+
+.chronicle-item:nth-child(even) {
+  direction: rtl;
+}
+
+.chronicle-item:nth-child(even) .chronicle-content {
+  direction: ltr;
+}
+
+.chronicle-item:hover {
+  border-color: var(--border-line-hover);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.chronicle-media-frame {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.chronicle-media-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chronicle-item:hover .chronicle-media-frame img {
+  transform: scale(1.04);
+}
+
+.cinematic-badge {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(15, 16, 19, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-line);
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--fog-grey);
+}
+
+.chronicle-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.chronicle-header h3 {
+  font-family: var(--font-serif);
+  font-size: 2.1rem;
+  font-weight: 400;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 0.35rem;
+}
+
+.chronicle-header span {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--amber-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.chronicle-quote {
+  border-left: 2px solid var(--amber-warm);
+  padding-left: 1.25rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.12rem;
+  color: #dfdfe4;
+  line-height: 1.5;
+}
+
+.chronicle-quote cite {
+  display: block;
+  font-style: normal;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: 0.5rem;
+}
+
+.chronicle-text {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.chronicle-av-note {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--border-line);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chronicle-av-note strong {
+  color: var(--amber-warm);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   PROFUNDIDAD CONCEPTUAL: SOLEDAD, COMUNICACIÓN Y SPILLOVER
+   ========================================================================== */
+.concepts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.concept-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  padding: 2.25rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.concept-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--amber-warm);
+}
+
+.concept-card h4 {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: #fff;
+  font-weight: 400;
+}
+
+.concept-card p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.concept-highlight {
+  background: rgba(227, 147, 53, 0.08);
+  border-left: 2px solid var(--amber-warm);
+  padding: 0.75rem 1rem;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.84rem;
+  color: var(--amber-soft);
+}
+
+/* ==========================================================================
+   SIMULADOR / CALCULADORA SOCIOLÓGICA (CONECTADA AL BACKEND EN PYTHON)
+   ========================================================================== */
+.calculator-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.calc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.calc-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.control-group label {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.control-group label span {
+  font-family: var(--font-mono);
+  color: var(--amber-warm);
+  font-weight: 700;
+}
+
+.range-slider {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg-subtle);
+  outline: none;
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--amber-warm);
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(227, 147, 53, 0.5);
+  transition: transform 0.15s ease;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.calc-select {
+  width: 100%;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-line);
+  color: var(--text-main);
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+}
+
+.calc-select:focus {
+  border-color: var(--amber-warm);
+}
+
+.btn-calculate {
+  background: var(--amber-warm);
+  color: #0f1013;
+  border: none;
+  padding: 1rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  transition: var(--transition-smooth);
+}
+
+.btn-calculate:hover {
+  background: var(--amber-soft);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(227, 147, 53, 0.3);
+}
+
+/* Panel de Resultados del Backend */
+.calc-results-panel {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.calc-result-header {
+  border-bottom: 1px solid var(--border-line);
+  padding-bottom: 1rem;
+}
+
+.calc-result-header h4 {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.calc-risk-badge {
+  display: inline-block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: 4px;
+  margin-top: 0.5rem;
+  background: rgba(227, 147, 53, 0.15);
+  color: var(--amber-soft);
+  border: 1px solid rgba(227, 147, 53, 0.3);
+}
+
+.calc-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.calc-stat-item {
+  background: var(--bg-surface);
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-line);
+}
+
+.calc-stat-val {
+  font-family: var(--font-serif);
+  font-size: 1.9rem;
+  color: var(--amber-warm);
+  line-height: 1.1;
+}
+
+.calc-stat-desc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+.calc-diagnosis-text {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  border-left: 2px solid var(--amber-warm);
+}
+
+.calc-strategy-text {
+  font-size: 0.84rem;
+  color: var(--amber-soft);
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   ESTRATEGIAS PRÁCTICAS (LOS 3 EJES Y 10 PAUTAS DEL INFORME)
+   ========================================================================== */
+.axes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.axis-block {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+}
+
+.axis-header {
+  margin-bottom: 2rem;
+  border-bottom: 1px solid var(--border-line);
+  padding-bottom: 1.25rem;
+}
+
+.axis-header h3 {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.axis-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  max-width: 800px;
+}
+
+.pautas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.pauta-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: var(--transition-smooth);
+}
+
+.pauta-card:hover {
+  border-color: var(--border-line-hover);
+  transform: translateY(-3px);
+}
+
+.pauta-number {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--amber-warm);
+  opacity: 0.8;
+}
+
+.pauta-card h4 {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: #fff;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.pauta-card p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+/* ==========================================================================
+   REFERENCIAS BIBLIOGRÁFICAS EN FORMATO APA 7.ª EDICIÓN
+   ========================================================================== */
+.apa-references-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-line);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+}
+
+.references-filter {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.ref-search-input {
+  flex: 1;
+  min-width: 260px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-line);
+  color: var(--text-main);
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  outline: none;
+}
+
+.ref-search-input:focus {
+  border-color: var(--amber-warm);
+}
+
+.references-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 1rem;
+}
+
+.references-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.references-list::-webkit-scrollbar-thumb {
+  background: var(--bg-subtle);
+  border-radius: 3px;
+}
+
+.reference-item {
+  padding-left: 2rem;
+  text-indent: -2rem; /* Sangría francesa típica de APA 7ma */
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-muted);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  padding-bottom: 1.25rem;
+}
+
+.reference-item strong {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.reference-item em {
+  font-style: italic;
+  color: var(--fog-grey);
+}
+
+.reference-item a {
+  color: var(--amber-warm);
+  text-decoration: none;
+  word-break: break-all;
+  display: inline-block;
+  margin-top: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.reference-item a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   FOOTER EDITORIAL / ACADÉMICO
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--border-line);
+  padding: 5rem 2rem 3rem 2rem;
+  background: #0b0c0e;
+  font-size: 0.88rem;
+  color: var(--text-dim);
+}
+
+.footer-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 4rem;
+  margin-bottom: 3.5rem;
+}
+
+.footer-brand h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: #fff;
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+}
+
+.footer-brand p {
+  color: var(--text-muted);
+  max-width: 480px;
+  line-height: 1.6;
+}
+
+.footer-col h5 {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--amber-warm);
+  margin-bottom: 1rem;
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.footer-col ul li {
+  color: var(--text-muted);
+}
+
+.footer-bottom {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  border-top: 1px solid var(--border-line);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   MEDIA QUERIES Y RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 968px) {
+  .site-nav {
+    padding: 1rem 1.5rem;
+  }
+  
+  .nav-links a {
+    display: none;
+  }
+
+  .chronicle-item {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    direction: ltr !important;
+  }
+
+  .calc-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 4.5rem 1.25rem;
+  }
+
+  .hero-section {
+    padding: 6rem 1.25rem 3.5rem 1.25rem;
+  }
+
+  .calculator-box, .apa-references-box, .axis-block {
+    padding: 1.75rem 1.25rem;
+  }
+
+  .calc-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}

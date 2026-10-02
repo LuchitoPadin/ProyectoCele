@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Ritmo Acelerado de Lima | Un Análisis Multidimensional</title>
+  <meta name="description" content="Landing page documental y multimedia sobre el ritmo de vida acelerado en Lima y su impacto en las relaciones personales y la salud afectiva.">
+  
+  <!-- Estilos visuales con estética cinematográfica y documental -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎞️</text></svg>">
+</head>
+<body>
+
+  <!-- Capa de grano analógico cinematográfico -->
+  <div class="film-grain" aria-hidden="true"></div>
+
+  <!-- Línea de progreso de lectura superior -->
+  <div id="reading-progress"></div>
+
+  <!-- ========================================================================
+       BARRA DE NAVEGACIÓN DOCUMENTAL
+       ======================================================================== -->
+  <nav class="site-nav" id="main-nav">
+    <div class="nav-brand">
+      <span class="film-roll-icon"></span>
+      <span class="nav-title">Crónica Urbana // U. de Lima 2026</span>
+    </div>
+
+    <div class="nav-links">
+      <a href="#metricas">Cifras</a>
+      <a href="#cronicas">Crónicas</a>
+      <a href="#dimensiones">Vínculos</a>
+      <a href="#calculadora">Simulador</a>
+      <a href="#estrategias">Estrategias</a>
+      <a href="#referencias">Bibliografía APA</a>
+
+      <!-- Botón de sonido ambiente sutil (garúa y tráfico) -->
+      <button class="audio-toggle-btn" id="audio-toggle-btn" title="Activar/Desactivar paisaje sonoro de Lima">
+        <span class="sound-wave">
+          <span></span><span></span><span></span>
+        </span>
+        <span class="audio-label">Sonido Ambiente: Lima</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       HERO CINEMATOGRÁFICO
+       ======================================================================== -->
+  <header class="hero-section">
+    <div class="hero-background-wrapper">
+      <img src="{{ url_for('static', filename='images/hero_via_expresa.jpg') }}" alt="Vía Expresa de Lima al atardecer bajo la garúa y neblina" class="hero-bg-img">
+      <div class="hero-gradient-overlay"></div>
+    </div>
+
+    <div class="hero-container">
+      <div class="hero-meta-badge">
+        <span>FACULTAD DE CIENCIAS SOCIALES Y HUMANIDADES</span>
+        <span>•</span>
+        <span>INVESTIGACIÓN AUDIOVISUAL</span>
+      </div>
+
+      <h1 class="hero-title">
+        El Ritmo de Vida Acelerado en Lima y la <em>Erosión del Afecto</em>
+      </h1>
+
+      <p class="hero-subtitle">
+        Un análisis multidimensional sobre cómo los prolongados desplazamientos, la hiperconectividad y la prisa cotidiana transforman la convivencia familiar, la pareja y la salud vincular en la metrópoli.
+      </p>
+
+      <!-- Ficha de claqueta / Créditos de autores del informe -->
+      <div class="hero-credits-card">
+        <div class="credit-block">
+          <h4>Investigadores / Autores</h4>
+          <div class="author-names">
+            {% for autor in data.autores %}
+              <span>{{ autor }}</span>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="credit-block">
+          <h4>Filiación y Asignatura</h4>
+          <p>{{ data.filiacion }}</p>
+          <p style="color: var(--amber-soft); margin-top: 2px;">{{ data.curso }} — {{ data.año }}</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       SECCIÓN 1: MÉTRICAS Y EL COSTO DEL TIEMPO
+       ======================================================================== -->
+  <section class="section" id="metricas">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">// Contexto Sociodemográfico</span>
+        <h2 class="section-title">La Metrópoli y la Fricción del Tiempo</h2>
+        <p class="section-lead">
+          En Lima, el aceleramiento cotidiano no es una mera cuestión de gestión individual del horario: es una condición estructural producida por la congestión, la asimetría de género y la precariedad laboral.
+        </p>
+      </div>
+
+      <div class="metrics-grid">
+        {% for metrica in data.metricas_clave %}
+          <div class="metric-card">
+            <div class="metric-number">{{ metrica.cifra }}</div>
+            <div class="metric-label">{{ metrica.etiqueta }}</div>
+            <div class="metric-desc">{{ metrica.descripcion }}</div>
+            <span class="metric-source">{{ metrica.fuente }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 2: CRÓNICAS AUDIOVISUALES (FOTOGRAMAS DOCUMENTALES)
+       ======================================================================== -->
+  <section class="section" id="cronicas" style="background: #121316;">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">// Mirada Documental</span>
+        <h2 class="section-title">Crónicas de la Desconexión Cotidiana</h2>
+        <p class="section-lead">
+          Tres escenas urbanas que retratan los puntos de quiebre donde la velocidad de la ciudad desgasta el encuentro interpersonal.
+        </p>
+      </div>
+
+      <div class="chronicles-container">
+        {% for cronica in data.cronicas %}
+          <article class="chronicle-item" id="cronica-{{ cronica.id }}">
+            <div class="chronicle-media-frame">
+              <img src="{{ url_for('static', filename='images/' + cronica.imagen) }}" alt="{{ cronica.titulo }}">
+              <div class="cinematic-badge">Fotograma Documental // 35mm</div>
+            </div>
+
+            <div class="chronicle-content">
+              <div class="chronicle-header">
+                <span>{{ cronica.subtitulo }}</span>
+                <h3>{{ cronica.titulo }}</h3>
+              </div>
+
+              <blockquote class="chronicle-quote">
+                {{ cronica.cita }}
+                <cite>{{ cronica.autor_cita }}</cite>
+              </blockquote>
+
+              <p class="chronicle-text">
+                {{ cronica.relato }}
+              </p>
+
+              <div class="chronicle-av-note">
+                <strong>Enfoque Audiovisual:</strong>
+                <span>{{ cronica.enfoque_audiovisual }}</span>
+              </div>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 3: PROFUNDIDAD CONCEPTUAL Y TEÓRICA
+       ======================================================================== -->
+  <section class="section" id="dimensiones">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">// Marco Teórico y Psicosocial</span>
+        <h2 class="section-title">Dimensiones Invisibles del Desgaste Afectivo</h2>
+        <p class="section-lead">
+          Los hallazgos del informe articulan la psicología aplicada, la sociología de la familia y el análisis audiovisual para explicar por qué la hiperconectividad coexiste con la soledad.
+        </p>
+      </div>
+
+      <div class="concepts-grid">
+        <!-- Tarjeta 1: Soledad Social vs Emocional -->
+        <div class="concept-card">
+          <div class="concept-icon">🪞</div>
+          <h4>Soledad Social vs. Soledad Emocional</h4>
+          <p>
+            Salas Blas et al. (2022) aclaran que la soledad en Lima no es la ausencia de personas. Una persona puede cruzar estaciones abarrotadas y compartir oficinas densas sintiendo, al mismo tiempo, una ausencia absoluta de apego íntimo y validación sincera.
+          </p>
+          <div class="concept-highlight">
+            Estar permanentemente comunicado no es equivalente a ser comprendido afectivamente.
+          </div>
+        </div>
+
+        <!-- Tarjeta 2: Fenómeno Spillover -->
+        <div class="concept-card">
+          <div class="concept-icon">⚡</div>
+          <h4>El Efecto 'Spillover' en la Pareja</h4>
+          <p>
+            El metaanálisis de Fellows et al. (2016) y estudios con 308 parejas demuestran cómo la presión temporal externa 'derrama' irritabilidad y fatiga en el hogar, deteriorando sistemáticamente la satisfacción conyugal y sexual.
+          </p>
+          <div class="concept-highlight">
+            El conflicto trabajo-familia actúa como un corrosivo silencioso del diálogo amoroso.
+          </div>
+        </div>
+
+        <!-- Tarjeta 3: Inequidad de Género -->
+        <div class="concept-card">
+          <div class="concept-icon">⚖️</div>
+          <h4>Brecha Estructural de Género</h4>
+          <p>
+            Según Mejía Madrid (2014) y la ENUT (INEI, 2024), las mujeres en pareja asumen más de cuatro horas diarias de trabajo doméstico no remunerado extra. La falta de corresponsabilidad intensifica su privación de ocio y salud mental.
+          </p>
+          <div class="concept-highlight">
+            El tiempo libre en Lima no es democrático: está estratificado por género y clase social.
+          </div>
+        </div>
+
+        <!-- Tarjeta 4: Cine y Resistencia Humana -->
+        <div class="concept-card">
+          <div class="concept-icon">🎬</div>
+          <h4>Lección Cinematográfica: Muccino (2006)</h4>
+          <p>
+            En <em>The Pursuit of Happyness</em>, la presión micro-cotidiana corrobora los hallazgos de Błachnio et al. (2026): el estrés reduce el afecto positivo, pero la comunicación intencional entre padre e hijo preservó el lazo vital contra la adversidad.
+          </p>
+          <div class="concept-highlight">
+            La narrativa audiovisual nos recuerda que el afecto consciente es la última trinchera de resistencia.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 4: SIMULADOR SOCIOLÓGICO CONECTADO A PYTHON (FLASK)
+       ======================================================================== -->
+  <section class="section" id="calculadora" style="background: #111215;">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">// Simulador de Campo</span>
+        <h2 class="section-title">Tu Radiografía en el Tiempo Limeño</h2>
+        <p class="section-lead">
+          Esta herramienta interactiva conecta con nuestro servidor en Python para contrastar tus hábitos diarios con los modelos matemáticos y sociológicos del informe.
+        </p>
+      </div>
+
+      <div class="calculator-box">
+        <div class="calc-layout">
+          <!-- Formulario de entrada -->
+          <form class="calc-controls" id="calc-form">
+            <div class="control-group">
+              <label for="slider-transporte">
+                Tiempo diario en transporte y tráfico:
+                <span id="val-transporte">3.0 hrs/día</span>
+              </label>
+              <input type="range" id="slider-transporte" class="range-slider" min="0.5" max="6.0" step="0.5" value="3.0">
+            </div>
+
+            <div class="control-group">
+              <label for="slider-pantalla">
+                Tiempo de ocio diario en pantallas/redes:
+                <span id="val-pantalla">3.5 hrs/día</span>
+              </label>
+              <input type="range" id="slider-pantalla" class="range-slider" min="0.5" max="8.0" step="0.5" value="3.5">
+            </div>
+
+            <div class="control-group">
+              <label for="select-ocupacion" style="margin-bottom: 0.5rem; display: block;">
+                Perfil socio-ocupacional:
+              </label>
+              <select id="select-ocupacion" class="calc-select">
+                <option value="universitario">Estudiante Universitario / Superior</option>
+                <option value="oficina_formal">Trabajador Formal / Oficinista</option>
+                <option value="comercio_informal">Comercio Ambulante / Independiente</option>
+                <option value="cuidador">Trabajo Doméstico y de Cuidados</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn-calculate" id="btn-submit-calc">
+              <span>Procesar Radiografía en Python</span>
+              <span style="font-size: 1.1rem;">→</span>
+            </button>
+          </form>
+
+          <!-- Panel de Resultados del Backend -->
+          <div class="calc-results-panel" id="calc-results">
+            <div class="calc-result-header">
+              <h4>Diagnóstico Sociológico Individual</h4>
+              <div class="calc-risk-badge">Esperando procesamiento de datos...</div>
+            </div>
+
+            <div class="calc-stats-grid">
+              <div class="calc-stat-item">
+                <div class="calc-stat-val">32.5 <span style="font-size: 1rem; color: var(--text-dim);">días/año</span></div>
+                <div class="calc-stat-desc">Días de tu año absorbidos íntegramente por el tráfico.</div>
+              </div>
+              <div class="calc-stat-item">
+                <div class="calc-stat-val">2.9 <span style="font-size: 1rem; color: var(--text-dim);">hrs/día</span></div>
+                <div class="calc-stat-desc">Ventana real de presencia afectiva libre de pantallas.</div>
+              </div>
+              <div class="calc-stat-item">
+                <div class="calc-stat-val">67.8%</div>
+                <div class="calc-stat-desc">Índice de riesgo por desborde Spillover en la intimidad.</div>
+              </div>
+              <div class="calc-stat-item">
+                <div class="calc-stat-val">780 <span style="font-size: 1rem; color: var(--text-dim);">hrs</span></div>
+                <div class="calc-stat-desc">Horas acumuladas anuales en el transporte público.</div>
+              </div>
+            </div>
+
+            <div class="calc-diagnosis-text">
+              Haz clic en <strong>"Procesar Radiografía en Python"</strong> para que el backend compute tus cifras personalizadas según la tasa de congestión metropolitana de Lima.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 5: ESTRATEGIAS PRÁCTICAS (LOS 3 EJES Y 10 PAUTAS DEL INFORME)
+       ======================================================================== -->
+  <section class="section" id="estrategias">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">// Rutas de Acción y Resistencia</span>
+        <h2 class="section-title">Decálogo de Preservación Vincular</h2>
+        <p class="section-lead">
+          Adaptables tanto al mundo formal como a los sectores independientes e informales de la capital. La calidad del vínculo no exige un excedente de horas, sino la gestión cualitativa del tiempo.
+        </p>
+      </div>
+
+      <div class="axes-container">
+        {% for eje_data in data.ejes_estrategicos %}
+          <div class="axis-block">
+            <div class="axis-header">
+              <h3>{{ eje_data.eje }}</h3>
+              <p>{{ eje_data.descripcion }}</p>
+            </div>
+
+            <div class="pautas-grid">
+              {% for pauta in eje_data.pautas %}
+                <div class="pauta-card">
+                  <div class="pauta-number">{{ pauta.num }}</div>
+                  <h4>{{ pauta.nombre }}</h4>
+                  <p>{{ pauta.detalle }}</p>
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       SECCIÓN 6: SECCIÓN DOCUMENTAL Y REFERENCIAS APA 7.ª EDICIÓN
+       ======================================================================== -->
+  <section class="section" id="referencias" style="background: #111215;">
+    <div class="section-container">
+      <div class="section-header">
+        <span class="section-tag">// Archivo Académico y Normativa</span>
+        <h2 class="section-title">Referencias Bibliográficas y Audiovisuales</h2>
+        <p class="section-lead">
+          Fuentes documentadas bajo los lineamientos de la 7.ª edición del Manual de Normas APA. Utiliza el buscador para filtrar fuentes por autor, revista o documental.
+        </p>
+      </div>
+
+      <div class="apa-references-box">
+        <div class="references-filter">
+          <input type="text" id="ref-search" class="ref-search-input" placeholder="Buscar por autor, palabra clave o fuente (ej. BCRP, Docuperú, Cassaretto, Fellows)...">
+        </div>
+
+        <div class="references-list" id="references-list">
+          {% for ref in data.referencias %}
+            <div class="reference-item">
+              <strong>{{ ref.autor }}</strong>. 
+              <em>{{ ref.titulo }}</em> 
+              {{ ref.fuente }}
+              {% if ref.link %}
+                <br>
+                <a href="{{ ref.link }}" target="_blank" rel="noopener noreferrer">↗ {{ ref.link }}</a>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       FOOTER EDITORIAL / ACADÉMICO
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h3>El Ritmo Acelerado de Lima</h3>
+        <p>
+          Proyecto de divulgación académica y ensayo audiovisual basado en el informe de investigación desarrollado para la Universidad de Lima. Diseñado con una sensibilidad documental para visibilizar el costo humano de la velocidad urbana.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Equipo de Investigación</h5>
+        <ul>
+          {% for autor in data.autores %}
+            <li>{{ autor }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Créditos Técnicos</h5>
+        <ul>
+          <li>Back-end: Python (Flask)</li>
+          <li>Front-end: HTML5 Semántico + CSS3</li>
+          <li>Fotografía: Documental 35mm</li>
+          <li>Diseño: Comunicación Audiovisual</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>Universidad de Lima — Metodología de la Investigación Social</div>
+      <div>Año Académico 2026 // Lima, Perú</div>
+    </div>
+  </footer>
+
+  <!-- Lógica e interactividad JavaScript -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
